@@ -1,7 +1,5 @@
 <template>
-  <div class="">
-    <p>mac</p>
-  </div>
+  <p>signin</p>
 </template>
 
 <script>
