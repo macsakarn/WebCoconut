@@ -41,13 +41,14 @@
       {{item.message}}
     </div>
 
-      <svg viewBox="-10 -20 300 300" style="position: absolute" class="bottle" onclick="alert('aaaaaa')">
+      <svg viewBox="-10 -20 300 300" style="position: absolute" class="bottle" key="row1">
         <path
           d="M 0 9 L 0 -7 C 0 -8 1 -9 1 -9 L 2 -10 L 2 -17 C 2 -18 6 -18 6 -17 C 6 -16 2 -16 2 -17 S 6 -18 6 -17 L 6 -16 L 6 -17 L 6 -15 C 6 -14 2 -14 2 -15 S 6 -16 6 -15 L 6 -10 L 7 -9 C 7 -9 8 -8 8 -7 L 8 -5 L 8 9 C 8 10 0 10 0 9 L 0 9 Q 1 8 1 6 L 1 -5 C 1 -5 1 -7 0 -7 C 1 -7 1 -5 1 -5 L 1 6 Q 1 8 0 9"
           stroke="#000000"
           stroke-width="0.15"
           fill="#F4F6F7"
           class="insidebottle"
+          onclick="alert('aaaaaa')"
         />
       </svg>
     
@@ -89,6 +90,18 @@
       </div>
     </div>
 
+    <!-- <div style="position: absolute" class="bottle">sdadsad</div> -->
+
+    <svg viewBox="-10 -20 300 300" style="position: absolute" class="bottle2" onclick="alert('aaaaaa')" key="row2">
+        <path
+          d="M 0 9 L 0 -7 C 0 -8 1 -9 1 -9 L 2 -10 L 2 -17 C 2 -18 6 -18 6 -17 C 6 -16 2 -16 2 -17 S 6 -18 6 -17 L 6 -16 L 6 -17 L 6 -15 C 6 -14 2 -14 2 -15 S 6 -16 6 -15 L 6 -10 L 7 -9 C 7 -9 8 -8 8 -7 L 8 -5 L 8 9 C 8 10 0 10 0 9 L 0 9 Q 1 8 1 6 L 1 -5 C 1 -5 1 -7 0 -7 C 1 -7 1 -5 1 -5 L 1 6 Q 1 8 0 9"
+          stroke="#000000"
+          stroke-width="0.15"
+          fill="#F4F6F7"
+          class="insidebottle"
+        />
+      </svg>
+
     <div class="groupwave3">
       <div class="bigwave3">
         <div style="width: 25%; position: relative">
@@ -126,6 +139,8 @@
       </div>
     </div>
 
+      
+
     <div class="groupsand">
       <div class="bigsand">
         <div style="width: 100%; position: relative">
@@ -160,7 +175,8 @@ export default {
 html {
   margin: 0px;
   overflow: hidden;
-  background-color: #00e4d1;
+  /* background-color: #00e4d1; */
+  background: linear-gradient(to bottom, #33ccff 0%, #ffffff 130%);
 }
 
 .wave {
@@ -234,6 +250,13 @@ html {
   top: 45vh;
   right: 18vw;
   animation: 15s linear 1s infinite bottleSimplehamonic;
+}
+
+.bottle2 {
+  opacity: 0.4;
+  top: 52vh;
+  right: 18vw;
+  animation: 17s linear 1.5s infinite bottleSimplehamonic;
 }
 
 .insidebottle {
