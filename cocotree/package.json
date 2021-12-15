@@ -9,7 +9,10 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@nuxtjs/auth-next": "5.0.0-1637745161.ea53f98",
     "@nuxtjs/axios": "^5.13.6",
+    "@vuelidate/core": "^2.0.0-alpha.32",
+    "@vuelidate/validators": "^2.0.0-alpha.25",
     "core-js": "^3.15.1",
     "nuxt": "^2.15.7"
   },
