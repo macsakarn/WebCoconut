@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div >
     <svg viewBox="60 -210 500 2000" style="position: absolute">
       <path
         class="coconut"
@@ -53,11 +53,11 @@
       </div>
     </div>
 
-    <!-- <div v-for="item in bottles" :key="item.message">
-      {{ item.message }}
-    </div> -->
-
-    <svg
+    
+    
+    <div v-for="item in bottles" :key="item.message">
+      
+      <svg
       viewBox="-10 -20 300 300"
       style="position: absolute"
       class="bottle"
@@ -69,13 +69,16 @@
         stroke-width="0.15"
         fill="#F4F6F7"
         class="insidebottle"
-        onclick="alert('aaaaaa')"
+        @click="openBottle(item.message)"
       />
     </svg>
+    </div>
+
+  
 
     <div class="groupwave2">
       <div class="bigwave2">
-        <div style="width: 25%; position: relative">
+        <div style="width: 25%; position: relative" >
           <svg viewBox="0 0 86 19">
             <path
               d="m 0 5 c 12 7 22 -7 43 0 c 26 7 25 -7 43 0 q 0 6.5 0 13 q -43 0 -86 0"
@@ -121,7 +124,7 @@
           stroke-width="0.15"
           fill="#F4F6F7"
           class="insidebottle2"
-          onclick="alert('AAAAA')"
+          @click="openBottle()"
         />
       </svg>
       
@@ -131,7 +134,7 @@
     <div class="groupwave3">
       <div class="bigwave3">
         <div style="width: 25%; position: relative">
-          <svg viewBox="0 0 86 19">
+          <svg viewBox="0 0 86 19" >
             <path
               d="m 0 5 c 12 7 22 -7 43 0 c 26 7 25 -7 43 0 q 0 6.5 0 13 q -43 0 -86 0"
               class="wave3"
@@ -174,13 +177,36 @@
         </div>
       </div>
     </div>
+
+    <div class="modal-overlay" v-show="modalbottle">
+    <div class="modal">
+      <p class=" title text-xl">{{usermessage}}</p>
+      <div class="field place-content-center">
+              <textarea 
+                class="textarea1 w-4/5 border-2 p-3  h-64 rounded-lg outline-none"
+                v-model="text"
+                type="text"
+              />
+      </div>
+      <div class="field place-content-center space-x-1">
+          <button class="rounded-lg h-14 bg-red-400 border-2 w-2/5 place-content-center" @click="closeBottle()"><p class="text-white">Cancel</p></button>
+          <button class="rounded-lg h-14 bg-green-400 border-2 w-2/5 place-content-center" @click="submit()"><p class="text-white">Save</p></button>
+        </div>
+    </div>
+    
   </div>
+
+  </div>
+
+  
 </template>
 
 <script>
 export default {
   data() {
     return {
+      text:"",
+      modalbottle: false,
       bottles: [
         { message: 'JIM' },
         { message: 'JOSH' },
@@ -190,17 +216,61 @@ export default {
         { message: 'MAC' },
         { message: 'TAKAI' },
       ],
+      usermessage: ""
     }
+  },
+  methods: {
+    openBottle(message) {
+      this.modalbottle = !this.modalbottle
+      this.usermessage = message
+    },
+    closeBottle(){
+      this.modalbottle = !this.modalbottle
+    }
+    
   },
 }
 </script>
 
 <style>
+.textarea1 {
+  resize: none;
+}
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  z-index: 100;
+  background-color: #e4c9a081;
+}
+
+.modal {
+  text-align: center;
+  background-color: white;
+  height: 500px;
+  width: 500px;
+  margin-top: 10%;
+  padding: 60px 0;
+  border-radius: 20px;
+}
+.field{
+  margin-bottom: 1%;
+  display: flex;
+}
 html {
   margin: 0px;
   overflow: hidden;
   /* background-color: #00e4d1; */
   background: linear-gradient(to bottom, #33ccff 0%, #ffffff 130%);
+}
+.title{
+  text-align: center;
+  margin: 3%;
+  color: #ECCB48;
 }
 
 .wave {
@@ -292,7 +362,7 @@ html {
   z-index: 3;
 }
 
-.groupbottle{
+.groupbottle {
   /* transform: scale(50); */
   /* top: 45vh;
   right: 18vw; */
@@ -311,6 +381,7 @@ html {
 .insidebottle {
   /* padding: 10vw; */
   animation: 15s linear 2s infinite vibrate;
+  left: 10vw;
   z-index: 1;
 }
 
@@ -326,6 +397,7 @@ html {
 
 .coconut2 {
   transform: scale(-3.4, 5);
+  
 }
 
 @keyframes vibrate {
