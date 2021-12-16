@@ -47,6 +47,7 @@
  import axios from 'axios'
  
  export default {
+   
    data () {
      return {
        username: "",
@@ -54,7 +55,18 @@
      }
    },
    methods: {
-     submit () {
+     async submit () {
+       try {
+         const response = await this.$auth.loginWith('local', {name:this.username, password:this.password})
+         console.log(response);
+         if (response.data.success){
+           this.$router.replace({name : '/'})
+         }
+       } catch (error) {
+         console.log(error);
+         
+       }
+
      }
    }
  }

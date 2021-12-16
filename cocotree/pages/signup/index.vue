@@ -147,8 +147,26 @@ export default {
   },
   methods: {
     submit() {
+      // Validate all fields
       this.$v.$touch();
-    },
+
+      // เช็คว่าในฟอร์มไม่มี error
+      if (!this.$v.$invalid) {
+        let data = {
+          username: this.username,
+          password: this.password,
+          confirm_password: this.confirm_password,
+          email: this.email,
+          mobile: this.mobile,
+          first_name: this.first_name,
+          last_name: this.last_name,
+        };
+
+        // axios
+        //   .post("http://localhost:3000/user/signup", data)
+          
+      }
+      }
   },
   validations: {
     password: {
