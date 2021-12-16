@@ -162,8 +162,8 @@ export default {
           last_name: this.last_name,
         };
 
-        axios
-          .post("http://localhost:3000/user/signup", data)
+        // axios
+        //   .post("http://localhost:3000/user/signup", data)
           
       }
       }

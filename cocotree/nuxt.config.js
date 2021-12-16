@@ -54,9 +54,9 @@ export default {
     strategies: {
       local: {  
         endpoints: {
-          login: { url: 'http://localhost:8080/auth/login', method: 'post', propertyName:"user"},
-          logout: { url: '/api/auth/logout', method: 'delete' },
-          user: { url: '/api/auth/user', method: 'get' }
+          login: { url: 'http://localhost:8080/auth/login', method: 'post', propertyName:"accessToken"},
+          logout: { url: 'http://localhost:8080/auth/login', method: 'delete' },
+          user: false
         },
         tokenName:"auth-token"
       }

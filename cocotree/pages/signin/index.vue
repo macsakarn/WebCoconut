@@ -57,7 +57,7 @@
    methods: {
      async submit () {
        try {
-         const response = await this.$auth.loginWith('local', {user: {username:this.username, password:this.password}})
+         const response = await this.$auth.loginWith('local', {name:this.username, password:this.password})
          console.log(response);
          if (response.data.success){
            this.$router.replace({name : '/'})
