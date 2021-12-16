@@ -55,13 +55,14 @@
 
     
     
-    <div v-for="item in bottles" :key="item.message">
-      
+    <div v-for="item in bottlesuser" :key="item.message">
       <svg
       viewBox="-10 -20 300 300"
       style="position: absolute"
       class="bottle"
       key="row1"
+      @click="openBottle(item.message)"
+      
     >
       <path
         d="M 0 9 L 0 -7 C 0 -8 1 -9 1 -9 L 2 -10 L 2 -17 C 2 -18 6 -18 6 -17 C 6 -16 2 -16 2 -17 S 6 -18 6 -17 L 6 -16 L 6 -17 L 6 -15 C 6 -14 2 -14 2 -15 S 6 -16 6 -15 L 6 -10 L 7 -9 C 7 -9 8 -8 8 -7 L 8 -5 L 8 9 C 8 10 0 10 0 9 L 0 9 Q 1 8 1 6 L 1 -5 C 1 -5 1 -7 0 -7 C 1 -7 1 -5 1 -5 L 1 6 Q 1 8 0 9"
@@ -69,7 +70,8 @@
         stroke-width="0.15"
         fill="#F4F6F7"
         class="insidebottle"
-        @click="openBottle(item.message)"
+        
+        
       />
     </svg>
     </div>
@@ -203,8 +205,19 @@
 
 <script>
 export default {
+  created() {
+  	this.interval = setInterval(() => {
+    	if (this.bottles.length > 0) {
+      	this.bottlesuser.push(this.bottles.shift());
+      } else {
+      	clearInterval(this.interval);
+      }
+    }, 1000)
+    },
   data() {
     return {
+      interval: null,
+      bottlesuser:[],
       text:"",
       modalbottle: false,
       bottles: [
@@ -382,7 +395,7 @@ html {
   /* padding: 10vw; */
   animation: 15s linear 2s infinite vibrate;
   left: 10vw;
-  z-index: 1;
+  z-index: 100;
 }
 
 .insidebottle2 {
