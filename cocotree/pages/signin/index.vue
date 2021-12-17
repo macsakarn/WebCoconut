@@ -17,6 +17,7 @@
             <input
               class="w-4/5 border-2 p-3 rounded-lg outline-none"
               v-model="name"
+              :class="{ 'border-red-400': this.error != null }"
               type="text"
               placeholder="Username"
             />
@@ -28,7 +29,15 @@
               class="w-4/5 border-2 p-3 rounded-lg outline-none"
               type="password"
               placeholder="Password"
+              :class="{ 'border-red-400': this.error != null }"
             />
+          </div>
+          <div class="field place-content-center">
+              <template v-if="this.error != null">
+              <p class="red" v-if="this.error != null">
+                The username or password is incorrect
+              </p>
+            </template>
           </div>
 
           <div class="field place-content-center">
@@ -64,6 +73,7 @@ export default {
     return {
       name: '',
       password: '',
+      error:null,
     }
   },
   methods: {
@@ -80,6 +90,8 @@ export default {
         if (this.$auth.loggedIn) {
           this.$axios.setToken(this.$auth.strategy.token.get())
           this.$router.replace({ name: 'home' })
+        }else{
+          this.error = "error"
         }
       } catch (error) {
         console.log(error)
