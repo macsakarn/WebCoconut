@@ -83,24 +83,6 @@
       </div>
     </div>
 
-    <!-- <div v-for="item in bottlesuser" :key="item.message">
-      <svg
-        viewBox="-10 -20 300 300"
-        style="position: absolute;"
-        class="bottle"
-        key="row1"
-        width="300"
-      >
-        <path
-          d="M 0 9 L 0 -7 C 0 -8 1 -9 1 -9 L 2 -10 L 2 -17 C 2 -18 6 -18 6 -17 C 6 -16 2 -16 2 -17 S 6 -18 6 -17 L 6 -16 L 6 -17 L 6 -15 C 6 -14 2 -14 2 -15 S 6 -16 6 -15 L 6 -10 L 7 -9 C 7 -9 8 -8 8 -7 L 8 -5 L 8 9 C 8 10 0 10 0 9 L 0 9 Q 1 8 1 6 L 1 -5 C 1 -5 1 -7 0 -7 C 1 -7 1 -5 1 -5 L 1 6 Q 1 8 0 9"
-          stroke="#000000"
-          stroke-width="0.15"
-          fill="#F4F6F7"
-          class="insidebottle"
-          @click="openBottle(item.message, item.image, item)"
-        />
-      </svg>
-    </div> -->
 
     <div class="groupwave2">
       <div class="bigwave2">
@@ -139,25 +121,6 @@
       </div>
     </div>
 
-    <!-- <div style="position: absolute" class="bottle">sdadsad</div> -->
-
-    <!-- <div class=""> -->
-    <!-- <div onclick="alert('AAAAA')" class="bottle2" style="z-index: 55;position: absolute;">☼</div> -->
-    <!-- <svg
-        viewBox="-10 -20 300 300"
-        style="position: absolute"
-        class="bottle2"
-        key="row2"
-      >
-        <path
-          d="M 0 9 L 0 -7 C 0 -8 1 -9 1 -9 L 2 -10 L 2 -17 C 2 -18 6 -18 6 -17 C 6 -16 2 -16 2 -17 S 6 -18 6 -17 L 6 -16 L 6 -17 L 6 -15 C 6 -14 2 -14 2 -15 S 6 -16 6 -15 L 6 -10 L 7 -9 C 7 -9 8 -8 8 -7 L 8 -5 L 8 9 C 8 10 0 10 0 9 L 0 9 Q 1 8 1 6 L 1 -5 C 1 -5 1 -7 0 -7 C 1 -7 1 -5 1 -5 L 1 6 Q 1 8 0 9"
-          stroke="#000000"
-          stroke-width="0.15"
-          fill="#F4F6F7"
-          class="insidebottle2"
-          @click="openBottle()"
-        />
-      </svg> -->
     <div v-for="item in bottlesuser" :key="item.message">
       <div class="bottle2">
         <img
@@ -170,8 +133,6 @@
       </div>
     </div>
 
-    <!-- <button class="btnbottle">AAAAAA</button> -->
-    <!-- </div> -->
 
     <div class="groupwave3">
       <div class="bigwave3">
@@ -237,11 +198,7 @@
             alt=""
             style="height: 253px; width: 480; object-fit: cover"
           />
-          <!-- <textarea
-            class="textarea1 w-4/5 border-2 p-3 h-64 rounded-lg outline-none"
-            v-model="text"
-            type="text"
-          /> -->
+
         </div>
         <div class="field place-content-center space-x-1">
           <button
@@ -374,7 +331,7 @@ export default {
   },
   async asyncData({ $axios }) {
     const bottles = await $axios.$get(
-      'http://localhost:8130/message/get/messages'
+      'http://localhost:8080/message/get/messages'
     )
     const name = await $axios.$get('http://localhost:8080/user/getName')
     return { bottles, name}
