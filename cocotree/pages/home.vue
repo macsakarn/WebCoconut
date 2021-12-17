@@ -160,6 +160,12 @@
       <!-- <button class="btnbottle">AAAAAA</button> -->
     </div>
 
+    <div v-for="item in bottlesuser" :key="item.message">
+      <div class="bottle2">
+      <img @click="openBottle(item.message, item.image, item)" src="https://media.discordapp.net/attachments/645996845457211452/921313844293427200/svg-path_bottle.png?width=201&height=670" class="insidebottle2" style="z-index: 200;" alt="">
+      </div>
+    </div>
+
     <div class="groupwave3">
       <div class="bigwave3">
         <div style="width: 25%; position: relative">
@@ -214,28 +220,49 @@ export default {
 
   created() {
     this.name = this.$store.state.data.name
-
+    this.interval = setInterval(() => {
+      if (this.bottles.length > 0) {
+        this.bottlesuser.push(this.bottles.shift())
+      } else {
+        clearInterval(this.interval)
+      }
+    }, 2000)
   },
   middleware: 'auth',
   methods: {
       signOut() {
         this.$auth.logout();
         this.$router.go({ name: 'signin' })
-      }
+      },
+      openBottle(message, img, item) {
+      this.modalbottle = !this.modalbottle
+      this.usermessage = message
+      this.userimage = img
+      this.item = item
+      // console.log(this.item);
+    },
+    closeBottle() {
+      this.modalbottle = !this.modalbottle
+    },
+    submit(){
+      alert(this.item);
+    },
   },
   data() {
     return {
       name:"",
-      bottles: [
-        { message: 'JIM' },
-        { message: 'JOSH' },
-        { message: 'TUU' },
-        { message: 'FLUKE' },
-        { message: 'BANK' },
-        { message: 'MAC' },
-        { message: 'TAKAI' },
-      ],
+      interval: null,
+      bottlesuser: [],
+      text: '',
+      modalbottle: false,
+      usermessage: "",
+      userimage: "",
+      item: "",
     }
+  },
+  async asyncData({ $axios }) {
+  const bottles = await $axios.$get('/message/get/messages')
+  return { bottles }
   },
 }
 </script>
@@ -332,7 +359,7 @@ html {
 .bottle2 {
   opacity: 0.4;
   top: 52vh;
-  right: 18vw;
+  right: 30vw;
   animation: 17s linear 1.5s infinite bottleSimplehamonic;
   z-index: 3;
 }
@@ -361,33 +388,37 @@ html {
 
 .insidebottle2 {
   /* padding: 10vw; */
-  animation: 15s linear 2.5s infinite vibrate;
+  position: absolute;
+  transform: translateX(-90%);
+  animation: 17s linear 1.5s infinite vibrate;
   z-index: 3;
 }
 
 .coconut {
-  transform: scale(3.4, 5);
+  transform: scale(3.8, 6);
 }
 
 .coconut2 {
-  transform: scale(-3.4, 5);
+  transform: scale(-3.8, 6);
 }
 
 @keyframes vibrate {
   from {
     transform: translateY(0vh);
     transform: rotate(-30deg);
+    
   }
 
   to {
     transform: translateY(1vh);
     transform: rotate(30deg);
+    
   }
 }
 
 @keyframes bottleSimplehamonic {
   from {
-    transform: translateX(0%);
+    transform: translateX(-30%);
   }
 
   to {

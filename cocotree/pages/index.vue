@@ -1,5 +1,38 @@
 <template>
-  <div >
+
+  <div>
+
+    <nav class="bg-gray-800">
+  <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+    <div class="relative flex items-center justify-between h-16">
+      <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
+      </div>
+      <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+        <div class="ml-3 absolute">
+          <div style="display: flex">
+            <p style="color: #fff;" class="w-24">{{name}}</p>
+            <button
+              class="
+                rounded-lg
+                h-7
+                bg-red-600
+                border-1
+                w-full
+                place-content-center
+              "
+              @click="signOut()"
+            >
+              <p class="text-white place-content-center">Logout</p>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</nav>
+
     <svg viewBox="60 -210 500 2000" style="position: absolute">
       <path
         class="coconut"
@@ -53,34 +86,28 @@
       </div>
     </div>
 
-    
-    
-    <div v-for="item in bottlesuser" :key="item.message">
+    <!-- <div v-for="item in bottlesuser" :key="item.message">
       <svg
-      viewBox="-10 -20 300 300"
-      style="position: absolute"
-      class="bottle"
-      key="row1"
-      @click="openBottle(item.message)"
-      
-    >
-      <path
-        d="M 0 9 L 0 -7 C 0 -8 1 -9 1 -9 L 2 -10 L 2 -17 C 2 -18 6 -18 6 -17 C 6 -16 2 -16 2 -17 S 6 -18 6 -17 L 6 -16 L 6 -17 L 6 -15 C 6 -14 2 -14 2 -15 S 6 -16 6 -15 L 6 -10 L 7 -9 C 7 -9 8 -8 8 -7 L 8 -5 L 8 9 C 8 10 0 10 0 9 L 0 9 Q 1 8 1 6 L 1 -5 C 1 -5 1 -7 0 -7 C 1 -7 1 -5 1 -5 L 1 6 Q 1 8 0 9"
-        stroke="#000000"
-        stroke-width="0.15"
-        fill="#F4F6F7"
-        class="insidebottle"
-        
-        
-      />
-    </svg>
-    </div>
-
-  
+        viewBox="-10 -20 300 300"
+        style="position: absolute;"
+        class="bottle"
+        key="row1"
+        width="300"
+      >
+        <path
+          d="M 0 9 L 0 -7 C 0 -8 1 -9 1 -9 L 2 -10 L 2 -17 C 2 -18 6 -18 6 -17 C 6 -16 2 -16 2 -17 S 6 -18 6 -17 L 6 -16 L 6 -17 L 6 -15 C 6 -14 2 -14 2 -15 S 6 -16 6 -15 L 6 -10 L 7 -9 C 7 -9 8 -8 8 -7 L 8 -5 L 8 9 C 8 10 0 10 0 9 L 0 9 Q 1 8 1 6 L 1 -5 C 1 -5 1 -7 0 -7 C 1 -7 1 -5 1 -5 L 1 6 Q 1 8 0 9"
+          stroke="#000000"
+          stroke-width="0.15"
+          fill="#F4F6F7"
+          class="insidebottle"
+          @click="openBottle(item.message, item.image, item)"
+        />
+      </svg>
+    </div> -->
 
     <div class="groupwave2">
       <div class="bigwave2">
-        <div style="width: 25%; position: relative" >
+        <div style="width: 25%; position: relative">
           <svg viewBox="0 0 86 19">
             <path
               d="m 0 5 c 12 7 22 -7 43 0 c 26 7 25 -7 43 0 q 0 6.5 0 13 q -43 0 -86 0"
@@ -117,9 +144,14 @@
 
     <!-- <div style="position: absolute" class="bottle">sdadsad</div> -->
 
-    <div class="">
+    <!-- <div class=""> -->
       <!-- <div onclick="alert('AAAAA')" class="bottle2" style="z-index: 55;position: absolute;">☼</div> -->
-      <svg viewBox="-10 -20 300 300" style="position: absolute"  class="bottle2" key="row2">
+      <!-- <svg
+        viewBox="-10 -20 300 300"
+        style="position: absolute"
+        class="bottle2"
+        key="row2"
+      >
         <path
           d="M 0 9 L 0 -7 C 0 -8 1 -9 1 -9 L 2 -10 L 2 -17 C 2 -18 6 -18 6 -17 C 6 -16 2 -16 2 -17 S 6 -18 6 -17 L 6 -16 L 6 -17 L 6 -15 C 6 -14 2 -14 2 -15 S 6 -16 6 -15 L 6 -10 L 7 -9 C 7 -9 8 -8 8 -7 L 8 -5 L 8 9 C 8 10 0 10 0 9 L 0 9 Q 1 8 1 6 L 1 -5 C 1 -5 1 -7 0 -7 C 1 -7 1 -5 1 -5 L 1 6 Q 1 8 0 9"
           stroke="#000000"
@@ -128,15 +160,20 @@
           class="insidebottle2"
           @click="openBottle()"
         />
-      </svg>
+      </svg> -->
+      <div v-for="item in bottlesuser" :key="item.message">
+      <div class="bottle2">
+      <img @click="openBottle(item.message, item.image, item)" src="https://media.discordapp.net/attachments/645996845457211452/921313844293427200/svg-path_bottle.png?width=201&height=670" class="insidebottle2" style="z-index: 200;" alt="">
+      </div>
+    </div>
       
       <!-- <button class="btnbottle">AAAAAA</button> -->
-    </div>
+    <!-- </div> -->
 
     <div class="groupwave3">
       <div class="bigwave3">
         <div style="width: 25%; position: relative">
-          <svg viewBox="0 0 86 19" >
+          <svg viewBox="0 0 86 19">
             <path
               d="m 0 5 c 12 7 22 -7 43 0 c 26 7 25 -7 43 0 q 0 6.5 0 13 q -43 0 -86 0"
               class="wave3"
@@ -181,66 +218,101 @@
     </div>
 
     <div class="modal-overlay" v-show="modalbottle">
-    <div class="modal">
-      <p class=" title text-xl">{{usermessage}}</p>
-      <div class="field place-content-center">
-              <textarea 
-                class="textarea1 w-4/5 border-2 p-3  h-64 rounded-lg outline-none"
-                v-model="text"
-                type="text"
-              />
-      </div>
-      <div class="field place-content-center space-x-1">
-          <button class="rounded-lg h-14 bg-red-400 border-2 w-2/5 place-content-center" @click="closeBottle()"><p class="text-white">Cancel</p></button>
-          <button class="rounded-lg h-14 bg-green-400 border-2 w-2/5 place-content-center" @click="submit()"><p class="text-white">Save</p></button>
+      <div class="modal">
+        <p class="title text-xl">{{ usermessage }}</p>
+        <div class="field place-content-center">
+          <img :src="userimage" alt="" style="height: 253px; width: 480; object-fit: cover;">
+          <!-- <textarea
+            class="textarea1 w-4/5 border-2 p-3 h-64 rounded-lg outline-none"
+            v-model="text"
+            type="text"
+          /> -->
         </div>
+        <div class="field place-content-center space-x-1">
+          <button
+            class="
+              rounded-lg
+              h-14
+              bg-red-400
+              border-2
+              w-2/5
+              place-content-center
+            "
+            @click="closeBottle()"
+          >
+            <p class="text-white">Cancel</p>
+          </button>
+          <button
+            class="
+              rounded-lg
+              h-14
+              bg-green-400
+              border-2
+              w-2/5
+              place-content-center
+            "
+            @click="submit()"
+          >
+            <p class="text-white">Save</p>
+          </button>
+        </div>
+      </div>
     </div>
-    
   </div>
-
-  </div>
-
-  
 </template>
 
 <script>
+import axios from '@nuxtjs/axios'
 export default {
   created() {
-  	this.interval = setInterval(() => {
-    	if (this.bottles.length > 0) {
-      	this.bottlesuser.push(this.bottles.shift());
+    this.interval = setInterval(() => {
+      if (this.bottles.length > 0) {
+        this.bottlesuser.push(this.bottles.shift())
       } else {
-      	clearInterval(this.interval);
+        clearInterval(this.interval)
       }
-    }, 1000)
-    },
+    }, 2000)
+    this.name = this.$store.state.data.name
+  },
+  middleware: 'auth',
   data() {
     return {
       interval: null,
-      bottlesuser:[],
-      text:"",
+      bottlesuser: [],
+      text: '',
       modalbottle: false,
-      bottles: [
-        { message: 'JIM' },
-        { message: 'JOSH' },
-        { message: 'TUU' },
-        { message: 'FLUKE' },
-        { message: 'BANK' },
-        { message: 'MAC' },
-        { message: 'TAKAI' },
-      ],
-      usermessage: ""
+      // bottles: [
+      //   { message: 'JIM' },
+      //   { message: 'JOSH' },
+      //   { message: 'TUU' },
+      //   { message: 'FLUKE' },
+      //   { message: 'BANK' },
+      //   { message: 'MAC' },
+      //   { message: 'TAKAI' },
+      // ],
+      usermessage: "",
+      userimage: "",
+      item: "",
     }
   },
+  async asyncData({ $axios }) {
+  const bottles = await $axios.$get('/message/get/messages')
+  return { bottles }
+  },
   methods: {
-    openBottle(message) {
+    openBottle(message, img, item) {
       this.modalbottle = !this.modalbottle
       this.usermessage = message
+      this.userimage = img
+      this.item = item
+      // console.log(this.item);
     },
-    closeBottle(){
+    closeBottle() {
       this.modalbottle = !this.modalbottle
-    }
-    
+    },
+    submit(){
+      alert(this.item);
+    },
   },
 }
 </script>
@@ -269,8 +341,9 @@ export default {
   margin-top: 10%;
   padding: 60px 0;
   border-radius: 20px;
+  /* overflow: auto; */
 }
-.field{
+.field {
   margin-bottom: 1%;
   display: flex;
 }
@@ -280,10 +353,10 @@ html {
   /* background-color: #00e4d1; */
   background: linear-gradient(to bottom, #33ccff 0%, #ffffff 130%);
 }
-.title{
+.title {
   text-align: center;
   margin: 3%;
-  color: #ECCB48;
+  color: #eccb48;
 }
 
 .wave {
@@ -370,7 +443,7 @@ html {
 .bottle2 {
   opacity: 0.4;
   top: 52vh;
-  right: 18vw;
+  right: 30vw;
   animation: 17s linear 1.5s infinite bottleSimplehamonic;
   z-index: 3;
 }
@@ -396,38 +469,42 @@ html {
   animation: 15s linear 2s infinite vibrate;
   left: 10vw;
   z-index: 100;
+  right: 30vw;
 }
 
 .insidebottle2 {
   /* padding: 10vw; */
-  animation: 15s linear 2.5s infinite vibrate;
+  position: absolute;
+  transform: translateX(-90%);
+  animation: 17s linear 1.5s infinite vibrate;
   z-index: 3;
 }
 
 .coconut {
-  transform: scale(3.4, 5);
+  transform: scale(3.8, 6);
 }
 
 .coconut2 {
-  transform: scale(-3.4, 5);
-  
+  transform: scale(-3.8, 6);
 }
 
 @keyframes vibrate {
   from {
     transform: translateY(0vh);
     transform: rotate(-30deg);
+    
   }
 
   to {
     transform: translateY(1vh);
     transform: rotate(30deg);
+    
   }
 }
 
 @keyframes bottleSimplehamonic {
   from {
-    transform: translateX(0%);
+    transform: translateX(-30%);
   }
 
   to {
