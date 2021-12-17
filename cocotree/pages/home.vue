@@ -1,23 +1,22 @@
 <template>
+
   <div>
-    <!-- This example requires Tailwind CSS v2.0+ -->
-<nav class="bg-gray-800">
+
+    <nav class="bg-gray-800">
   <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-    <div class="relative flex items-center justify-between h-16">
-      <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-      </div>
+    <div class="relative flex items-center justify-items-end h-16">
+      
       <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
         <div class="ml-3 absolute">
           <div style="display: flex">
-            <p style="color: #fff;" class="w-24">{{name}}</p>
+            <p style="color: #fff; width: 30vw;" class="w-24">{{name}}</p>
             <button
               class="
                 rounded-lg
                 h-7
                 bg-red-600
                 border-1
-                w-full
-                place-content-center
+                w-48
               "
               @click="signOut()"
             >
@@ -85,25 +84,24 @@
       </div>
     </div>
 
-    <!-- <div v-for="item in bottles" :key="item.message">
-      {{ item.message }}
+    <!-- <div v-for="item in bottlesuser" :key="item.message">
+      <svg
+        viewBox="-10 -20 300 300"
+        style="position: absolute;"
+        class="bottle"
+        key="row1"
+        width="300"
+      >
+        <path
+          d="M 0 9 L 0 -7 C 0 -8 1 -9 1 -9 L 2 -10 L 2 -17 C 2 -18 6 -18 6 -17 C 6 -16 2 -16 2 -17 S 6 -18 6 -17 L 6 -16 L 6 -17 L 6 -15 C 6 -14 2 -14 2 -15 S 6 -16 6 -15 L 6 -10 L 7 -9 C 7 -9 8 -8 8 -7 L 8 -5 L 8 9 C 8 10 0 10 0 9 L 0 9 Q 1 8 1 6 L 1 -5 C 1 -5 1 -7 0 -7 C 1 -7 1 -5 1 -5 L 1 6 Q 1 8 0 9"
+          stroke="#000000"
+          stroke-width="0.15"
+          fill="#F4F6F7"
+          class="insidebottle"
+          @click="openBottle(item.message, item.image, item)"
+        />
+      </svg>
     </div> -->
-
-    <svg
-      viewBox="-10 -20 300 300"
-      style="position: absolute"
-      class="bottle"
-      key="row1"
-    >
-      <path
-        d="M 0 9 L 0 -7 C 0 -8 1 -9 1 -9 L 2 -10 L 2 -17 C 2 -18 6 -18 6 -17 C 6 -16 2 -16 2 -17 S 6 -18 6 -17 L 6 -16 L 6 -17 L 6 -15 C 6 -14 2 -14 2 -15 S 6 -16 6 -15 L 6 -10 L 7 -9 C 7 -9 8 -8 8 -7 L 8 -5 L 8 9 C 8 10 0 10 0 9 L 0 9 Q 1 8 1 6 L 1 -5 C 1 -5 1 -7 0 -7 C 1 -7 1 -5 1 -5 L 1 6 Q 1 8 0 9"
-        stroke="#000000"
-        stroke-width="0.15"
-        fill="#F4F6F7"
-        class="insidebottle"
-        onclick="alert('aaaaaa')"
-      />
-    </svg>
 
     <div class="groupwave2">
       <div class="bigwave2">
@@ -144,27 +142,31 @@
 
     <!-- <div style="position: absolute" class="bottle">sdadsad</div> -->
 
-    <div class="">
+    <!-- <div class=""> -->
       <!-- <div onclick="alert('AAAAA')" class="bottle2" style="z-index: 55;position: absolute;">☼</div> -->
-      <svg viewBox="-10 -20 300 300" style="position: absolute"  class="bottle2" key="row2">
+      <!-- <svg
+        viewBox="-10 -20 300 300"
+        style="position: absolute"
+        class="bottle2"
+        key="row2"
+      >
         <path
           d="M 0 9 L 0 -7 C 0 -8 1 -9 1 -9 L 2 -10 L 2 -17 C 2 -18 6 -18 6 -17 C 6 -16 2 -16 2 -17 S 6 -18 6 -17 L 6 -16 L 6 -17 L 6 -15 C 6 -14 2 -14 2 -15 S 6 -16 6 -15 L 6 -10 L 7 -9 C 7 -9 8 -8 8 -7 L 8 -5 L 8 9 C 8 10 0 10 0 9 L 0 9 Q 1 8 1 6 L 1 -5 C 1 -5 1 -7 0 -7 C 1 -7 1 -5 1 -5 L 1 6 Q 1 8 0 9"
           stroke="#000000"
           stroke-width="0.15"
           fill="#F4F6F7"
           class="insidebottle2"
-          onclick="alert('AAAAA')"
+          @click="openBottle()"
         />
-      </svg>
-      
-      <!-- <button class="btnbottle">AAAAAA</button> -->
-    </div>
-
-    <div v-for="item in bottlesuser" :key="item.message">
+      </svg> -->
+      <div v-for="item in bottlesuser" :key="item.message">
       <div class="bottle2">
       <img @click="openBottle(item.message, item.image, item)" src="https://media.discordapp.net/attachments/645996845457211452/921313844293427200/svg-path_bottle.png?width=201&height=670" class="insidebottle2" style="z-index: 200;" alt="">
       </div>
     </div>
+      
+      <!-- <button class="btnbottle">AAAAAA</button> -->
+    <!-- </div> -->
 
     <div class="groupwave3">
       <div class="bigwave3">
@@ -209,17 +211,107 @@
           <svg viewBox="-15 -7 86 19">
             <path d="M 0 0 C 5 -7 45 -11 54 0 L 54 5 L 0 5" class="sand"></path>
           </svg>
+          
         </div>
       </div>
     </div>
+    <img @click="openBottlesent()" key="bottle2" src="https://media.discordapp.net/attachments/645996845457211452/921313844293427200/svg-path_bottle.png?width=201&height=670" class="sandbottle mx-auto" style="z-index: 200;" alt="">
+ 
+    <div class="modal-overlay" v-show="modalbottle">
+      <div class="modal">
+        <p class="title text-xl">{{ usermessage }}</p>
+        <div class="field place-content-center">
+          <img :src="userimage" alt="" style="height: 253px; width: 480; object-fit: cover;">
+          <!-- <textarea
+            class="textarea1 w-4/5 border-2 p-3 h-64 rounded-lg outline-none"
+            v-model="text"
+            type="text"
+          /> -->
+        </div>
+        <div class="field place-content-center space-x-1">
+          <button
+            class="
+              rounded-lg
+              h-14
+              bg-red-400
+              border-2
+              w-2/5
+              place-content-center
+            "
+            @click="closeBottle()"
+          >
+            <p class="text-white">Cancel</p>
+          </button>
+          <button
+            class="
+              rounded-lg
+              h-14
+              bg-green-400
+              border-2
+              w-2/5
+              place-content-center
+            "
+            @click="submit()"
+          >
+            <p class="text-white">Save</p>
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+
+
+        <div class="modal-overlay" v-show="modalbottlesent">
+      <div class="modal">
+        <p class="title text-xl">{{ usermessage }}</p>
+        <div class="field place-content-center">
+          <input
+                v-model="message"
+                class="w-4/5 border-2 p-3 rounded-lg outline-none"
+                type="text"
+                placeholder="Title"
+              />
+        </div>
+        <div class="field place-content-center space-x-1">
+          <button
+            class="
+              rounded-lg
+              h-14
+              bg-red-400
+              border-2
+              w-2/5
+              place-content-center
+            "
+            @click="closeBottlesent()"
+          >
+            <p class="text-white">Cancel</p>
+          </button>
+
+          <button
+            class="
+              rounded-lg
+              h-14
+              bg-green-400
+              border-2
+              w-2/5
+              place-content-center
+            "
+            @click="submit()"
+          >
+            <p class="text-white">Save</p>
+          </button>
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 
 <script>
+import axios from '@nuxtjs/axios'
 export default {
-
   created() {
-    this.name = this.$store.state.data.name
     this.interval = setInterval(() => {
       if (this.bottles.length > 0) {
         this.bottlesuser.push(this.bottles.shift())
@@ -227,14 +319,33 @@ export default {
         clearInterval(this.interval)
       }
     }, 2000)
+
+  },
+  middleware: 'auth',
+  data() {
+    return {
+      interval: null,
+      bottlesuser: [],
+      text: '',
+      message:'',
+      modalbottlesent: false,
+      modalbottle: false,
+      usermessage: "",
+      userimage: "",
+      item: "",
+    }
+  },
+  async asyncData({ $axios }) {
+  const bottles = await $axios.$get('http://localhost:8130/message/get/messages')
+  const name = await $axios.$get("http://localhost:8080/user/getName")
+  return { bottles, name }
+  
+
+
   },
   middleware: 'auth',
   methods: {
-      signOut() {
-        this.$auth.logout();
-        this.$router.go({ name: 'signin' })
-      },
-      openBottle(message, img, item) {
+    openBottle(message, img, item) {
       this.modalbottle = !this.modalbottle
       this.usermessage = message
       this.userimage = img
@@ -244,35 +355,64 @@ export default {
     closeBottle() {
       this.modalbottle = !this.modalbottle
     },
+    openBottlesent(){
+      this.modalbottlesent = !this.modalbottlesent
+    },
+    closeBottlesent(){
+      this.modalbottlesent = !this.modalbottlesent
+    },
+
     submit(){
       alert(this.item);
     },
-  },
-  data() {
-    return {
-      name:"",
-      interval: null,
-      bottlesuser: [],
-      text: '',
-      modalbottle: false,
-      usermessage: "",
-      userimage: "",
-      item: "",
-    }
-  },
-  async asyncData({ $axios }) {
-  const bottles = await $axios.$get('/message/get/messages')
-  return { bottles }
+    signOut() {
+        this.$auth.logout();
+        this.$router.go({ name: 'signin' })
+      },
   },
 }
 </script>
 
 <style>
+.textarea1 {
+  resize: none;
+}
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  z-index: 100;
+  background-color: #e4c9a081;
+}
+
+.modal {
+  text-align: center;
+  background-color: white;
+  height: 500px;
+  width: 500px;
+  margin-top: 10%;
+  padding: 60px 0;
+  border-radius: 20px;
+  /* overflow: auto; */
+}
+.field {
+  margin-bottom: 1%;
+  display: flex;
+}
 html {
   margin: 0px;
   overflow: hidden;
   /* background-color: #00e4d1; */
   background: linear-gradient(to bottom, #33ccff 0%, #ffffff 130%);
+}
+.title {
+  text-align: center;
+  margin: 3%;
+  color: #eccb48;
 }
 
 .wave {
@@ -364,7 +504,7 @@ html {
   z-index: 3;
 }
 
-.groupbottle{
+.groupbottle {
   /* transform: scale(50); */
   /* top: 45vh;
   right: 18vw; */
@@ -383,7 +523,9 @@ html {
 .insidebottle {
   /* padding: 10vw; */
   animation: 15s linear 2s infinite vibrate;
-  z-index: 1;
+  left: 10vw;
+  z-index: 100;
+  right: 30vw;
 }
 
 .insidebottle2 {
@@ -393,7 +535,14 @@ html {
   animation: 17s linear 1.5s infinite vibrate;
   z-index: 3;
 }
-
+.sandbottle{
+  position: absolute;
+  height: 40vh;
+  transform: rotate(-80deg);
+  z-index: 3;
+  left: 48%;
+  top: 68vh;
+}
 .coconut {
   transform: scale(3.8, 6);
 }
