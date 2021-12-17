@@ -291,7 +291,7 @@
                 v-model="search"
                 class="w-4/5 border-2 p-3 rounded-lg outline-none"
                 type="text"
-                placeholder="Search"
+                placeholder="Search GIF"
               />
 
             <div class="absolute top-2 right-14"> <button @click="fetchUrl()" class="h-10 w-20 text-white rounded-lg bg-red-500 hover:bg-red-600">Search</button> </div>
@@ -383,7 +383,8 @@ export default {
   methods: {
     async fetchUrl(){
       const gif = await this.$axios.$get("http://localhost:8130/message/gif/" + this.search)
-      console.log(this.search);
+      // console.log(this.search);
+      if(gif.length <= 0){alert("Not Found")}
       this.gif = gif;
     },
     openBottle(message, img, item) {
@@ -419,7 +420,13 @@ export default {
           "message": this.title,
           "image": this.useimage,
 })
-      alert("add complete");
+      alert("Sent Complete");
+      this.modalbottlesent = !this.modalbottlesent;
+      this.title = ""
+       this.search = ""
+      this.useimage = ""
+      this.gif = ""
+
     }
   },
 }
