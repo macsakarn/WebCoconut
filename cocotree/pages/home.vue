@@ -14,9 +14,11 @@
               sm:static sm:inset-auto sm:ml-6 sm:pr-0
             "
           >
+          
             <div class="ml-3 absolute">
               <div style="display: flex">
                 <p style="color: #fff; width: 60vw" class="w-24">{{ name }}</p>
+
                 <button
                   class="rounded-lg h-7 bg-red-600 border-1 w-48"
                   @click="signOut()"
@@ -82,7 +84,6 @@
         </div>
       </div>
     </div>
-
 
     <div class="groupwave2">
       <div class="bigwave2">
@@ -180,6 +181,7 @@
         </div>
       </div>
     </div>
+
     <img
       @click="openBottlesent()"
       key="bottle2"
@@ -188,6 +190,68 @@
       style="z-index: 200"
       alt=""
     />
+    <div v-if="this.modaltreasure == false">
+    <img
+      @click="opentreasure()"
+      key="treasureclose"
+      src="https://media.discordapp.net/attachments/686119492723802132/921457022568906762/Pngtreecartoon_brown_treasure_chest_illustration_4617990.png?width=841&height=676"
+      class="treasure mx-auto"
+      style="z-index: 200"
+      alt=""
+    />
+    </div>
+    <div v-if="this.modaltreasure == true">
+    <img
+      key="treasureopen"
+      src="https://media.discordapp.net/attachments/686119492723802132/921457022237540382/Pngtreean_open_treasure_chest_illustration_4619909.png?width=841&height=670"
+      class="treasure mx-auto"
+      style="z-index: 200"
+      alt=""
+    />
+    </div>
+
+    <div class="modal-overlay" v-show="modaltreasure">
+      <div class="modal">
+        <p class="title text-xl">{{ usermessage }}</p>
+        <div class="field place-content-center">
+          <img
+            :src="userimage"
+            alt=""
+            style="height: 253px; width: 480; object-fit: cover"
+          />
+        </div>
+        <div class="field place-content-center space-x-1">
+          <button
+            class="
+              rounded-lg
+              h-14
+              bg-red-400
+              border-2
+              w-2/5
+              place-content-center
+            "
+            @click="closetreasure()"
+          >
+            <p class="text-white">Cancel</p>
+          </button>
+          <button
+            class="
+              rounded-lg
+              h-14
+              bg-green-400
+              border-2
+              w-2/5
+              place-content-center
+            "
+            @click="submit()"
+          >
+            <p class="text-white">Save</p>
+          </button>
+        </div>
+      </div>
+    </div>
+
+
 
     <div class="modal-overlay" v-show="modalbottle">
       <div class="modal">
@@ -198,7 +262,6 @@
             alt=""
             style="height: 253px; width: 480; object-fit: cover"
           />
-
         </div>
         <div class="field place-content-center space-x-1">
           <button
@@ -314,6 +377,7 @@ export default {
   middleware: 'auth',
   data() {
     return {
+      modaltreasure:false,
       interval: null,
       bottlesuser: [],
       text: '',
@@ -343,6 +407,13 @@ export default {
       // console.log(this.search);
       if(gif.length <= 0){alert("Not Found")}
       this.gif = gif;
+    },
+    opentreasure(){
+      this.modaltreasure = !this.modaltreasure
+    },
+    closetreasure(){
+      this.modaltreasure = !this.modaltreasure
+
     },
     openBottle(message, img, item) {
       this.modalbottle = !this.modalbottle
@@ -561,6 +632,14 @@ html {
   left: 48%;
   top: 68vh;
 }
+.treasure{
+  position: absolute;
+  height: 30vh;
+  transform: rotate(5deg);
+  left: 80%;
+  top: 68vh;
+}
+
 .coconut {
   transform: scale(3.8, 6);
 }
