@@ -1,5 +1,7 @@
 <template>
   <div>
+    <button class="btn btn-primary btn-sm" @click.prevent="playSound('http://soundbible.com/mp3/Elevator Ding-SoundBible.com-685385892.mp3')"><span class="fa fa-play-circle-o"></span></button>
+
     <nav class="bg-gray-800">
       <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
         <div class="relative flex items-center justify-items-end h-16">
@@ -14,7 +16,6 @@
               sm:static sm:inset-auto sm:ml-6 sm:pr-0
             "
           >
-          
             <div class="ml-3 absolute">
               <div style="display: flex">
                 <p style="color: #fff; width: 60vw" class="w-24">{{ name }}</p>
@@ -125,7 +126,7 @@
     <div v-for="item in bottlesuser" :key="item.message">
       <div class="bottle2">
         <img
-          @click="openBottle(item.message, item.image, item)"
+          @click="openBottle(item.message, item.image, item.title, item)"
           src="https://media.discordapp.net/attachments/645996845457211452/921313844293427200/svg-path_bottle.png?width=201&height=670"
           class="insidebottle2"
           style="z-index: 200"
@@ -134,6 +135,8 @@
       </div>
     </div>
 
+    <!-- <button class="btnbottle">AAAAAA</button> -->
+    <!-- </div> -->
 
     <div class="groupwave3">
       <div class="bigwave3">
@@ -191,31 +194,61 @@
       alt=""
     />
     <div v-if="this.modaltreasure == false">
-    <img
-      @click="opentreasure()"
-      key="treasureclose"
-      src="https://media.discordapp.net/attachments/686119492723802132/921457022568906762/Pngtreecartoon_brown_treasure_chest_illustration_4617990.png?width=841&height=676"
-      class="treasure mx-auto"
-      style="z-index: 200"
-      alt=""
-    />
+      <img
+        @click="opentreasure()"
+        key="treasureclose"
+        src="https://media.discordapp.net/attachments/686119492723802132/921457022568906762/Pngtreecartoon_brown_treasure_chest_illustration_4617990.png?width=841&height=676"
+        class="treasure mx-auto"
+        style="z-index: 200"
+        alt=""
+      />
     </div>
     <div v-if="this.modaltreasure == true">
-    <img
-      key="treasureopen"
-      src="https://media.discordapp.net/attachments/686119492723802132/921457022237540382/Pngtreean_open_treasure_chest_illustration_4619909.png?width=841&height=670"
-      class="treasure mx-auto"
-      style="z-index: 200"
-      alt=""
-    />
+      <img
+        @click="closetreasure()"
+        key="treasureopen"
+        src="https://media.discordapp.net/attachments/686119492723802132/921457022237540382/Pngtreean_open_treasure_chest_illustration_4619909.png?width=841&height=670"
+        class="treasure mx-auto"
+        style="z-index: 500"
+        alt=""
+      />
     </div>
 
-    <div class="modal-overlay" v-show="modaltreasure">
+    <div class="modal-overlay" v-show="modaltreasure" style="z-index: 300;">
       <div class="modal">
-        <p class="title text-xl">{{ usermessage }}</p>
+        <div
+          @click="closetreasure()"
+          class="
+            modal-close
+            absolute
+            top-0
+            right-0
+            cursor-pointer
+            flex flex-col
+            items-center
+            mt-4
+            mr-4
+            text-white text-sm
+            z-50
+          "
+        >
+          <svg
+            class="fill-current text-white"
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 18 18"
+          >
+            <path
+              d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"
+            ></path>
+          </svg>
+        </div>
+        <p class="title text-xl">{{ invtitle }}</p>
+        <p class="title text-xl">Message : {{ invmsg }}</p>
         <div class="field place-content-center">
           <img
-            :src="userimage"
+            :src="invimg"
             alt=""
             style="height: 253px; width: 480; object-fit: cover"
           />
@@ -225,37 +258,36 @@
             class="
               rounded-lg
               h-14
-              bg-red-400
+              bg-blue-400
               border-2
               w-2/5
               place-content-center
             "
-            @click="closetreasure()"
+            @click="prevpage()"
           >
-            <p class="text-white">Cancel</p>
+            <p class="text-white">Previous</p>
           </button>
           <button
             class="
               rounded-lg
               h-14
-              bg-green-400
+              bg-blue-400
               border-2
               w-2/5
               place-content-center
             "
-            @click="submit()"
+            @click="nextpage()"
           >
-            <p class="text-white">Save</p>
+            <p class="text-white">Next</p>
           </button>
         </div>
       </div>
     </div>
 
-
-
-    <div class="modal-overlay" v-show="modalbottle">
+    <div class="modal-overlay" v-show="modalbottle" style="z-index: 300;">
       <div class="modal">
-        <p class="title text-xl">{{ usermessage }}</p>
+        <p class="title text-xl">{{ usertitle }}</p>
+        <p class="title text-lg">message: {{ usermessage }}</p>
         <div class="field place-content-center">
           <img
             :src="userimage"
@@ -294,27 +326,48 @@
       </div>
     </div>
 
-    <div class="modal-overlay" v-show="modalbottlesent" style="z-index: 1000;">
+    <div class="modal-overlay" v-show="modalbottlesent" style="z-index: 1000">
       <div class="modal">
-        <p class="title text-xl">{{ usermessage }}</p>
         <div class="field place-content-center">
           <input
             v-model="title"
+            class="w-4/5 border-2 p-3 rounded-lg outline-none"
+            type="text"
+            placeholder="Title"
+          />
+        </div>
+        <div class="field place-content-center">
+          <input
+            v-model="message"
             class="w-4/5 border-2 p-3 rounded-lg outline-none"
             type="text"
             placeholder="Message"
           />
         </div>
 
-        <div class=" field place-content-center relative">
+        <div class="field place-content-center relative">
           <input
-                v-model="search"
-                class="w-4/5 border-2 p-3 rounded-lg outline-none"
-                type="text"
-                placeholder="Search GIF"
-              />
+            v-model="search"
+            class="w-4/5 border-2 p-3 rounded-lg outline-none"
+            type="text"
+            placeholder="Search GIF"
+          />
 
-            <div class="absolute top-2 right-14"> <button @click="fetchUrl()" class="h-10 w-20 text-white rounded-lg bg-red-500 hover:bg-red-600">Search</button> </div>
+          <div class="absolute top-2 right-14">
+            <button
+              @click="fetchUrl()"
+              class="
+                h-10
+                w-20
+                text-white
+                rounded-lg
+                bg-red-500
+                hover:bg-red-600
+              "
+            >
+              Search
+            </button>
+          </div>
         </div>
 
         <div class="field place-content-center">
@@ -323,7 +376,7 @@
               :src="url"
               alt=""
               @click="useImage(url)"
-              :class="{isselect : useimage == url}"
+              :class="{ isselect: useimage == url }"
               style="height: 253px; width: 480; object-fit: cover"
             />
           </div>
@@ -363,8 +416,11 @@
 </template>
 
 <script>
+
 import axios from '@nuxtjs/axios'
+
 export default {
+  
   created() {
     this.interval = setInterval(() => {
       if (this.bottles.length > 0) {
@@ -372,12 +428,14 @@ export default {
       } else {
         clearInterval(this.interval)
       }
-    }, 2000)
+    }, 4000)
+
   },
+  
   middleware: 'auth',
   data() {
     return {
-      modaltreasure:false,
+      modaltreasure: false,
       interval: null,
       bottlesuser: [],
       text: '',
@@ -385,43 +443,77 @@ export default {
       modalbottlesent: false,
       modalbottle: false,
       usermessage: '',
+      usertitle: '',
       userimage: '',
       item: '',
       search: '',
-      gif:'',
-      useimage:'',
+      gif: '',
+      useimage: '',
       title: '',
+      invmsg: '',
+      invtitle: '',
+      invimg: '',
+      indexinv: 0,
     }
   },
   async asyncData({ $axios }) {
     const bottles = await $axios.$get(
-      'http://localhost:8080/message/get/messages'
+      'http://localhost:8130/message/get/messages'
     )
-    const name = await $axios.$get('http://localhost:8080/user/getName')
-    return { bottles, name}
+    const inventory = await $axios.$get('/inventory/getitem')
+    const name = await $axios.$get('/user/getName')
+    return { bottles, name, inventory }
   },
   middleware: 'auth',
   methods: {
-    async fetchUrl(){
-      const gif = await this.$axios.$get("http://localhost:8130/message/gif/" + this.search)
+    async fetchUrl() {
+      const gif = await this.$axios.$get(
+        'http://localhost:8130/message/gif/' + this.search
+      )
       // console.log(this.search);
-      if(gif.length <= 0){alert("Not Found")}
-      this.gif = gif;
+      if (gif.length <= 0) {
+        alert('Not Found')
+      }
+      this.gif = gif
     },
-    opentreasure(){
+    nextpage() {
+      if (this.indexinv < this.inventory.items.length-1) {
+        this.indexinv += 1
+        this.invmsg = this.inventory.items[this.indexinv].message
+        this.invtitle = this.inventory.items[this.indexinv].title
+        this.invimg = this.inventory.items[this.indexinv].image
+      } else {
+        alert('คุณไม่ได้ไปต่อ')
+      }
+    },
+    prevpage() {
+      if (this.indexinv > 0) {
+        this.indexinv -= 1
+        this.invmsg = this.inventory.items[this.indexinv].message
+        this.invtitle = this.inventory.items[this.indexinv].title
+        this.invimg = this.inventory.items[this.indexinv].image
+      } else {
+        alert('คุณได้ถึงจุดเริ่มต้นแล้ว')
+      }
+    },
+    opentreasure() {
+      this.modaltreasure = !this.modaltreasure
+      this.invmsg = this.inventory.items[this.indexinv].message
+      this.invtitle = this.inventory.items[this.indexinv].title
+      this.invimg = this.inventory.items[this.indexinv].image
+    },
+    closetreasure() {
       this.modaltreasure = !this.modaltreasure
     },
-    closetreasure(){
-      this.modaltreasure = !this.modaltreasure
-
-    },
-    openBottle(message, img, item) {
+    openBottle(message, img, title, item) {
       this.modalbottle = !this.modalbottle
+      this.usertitle = title
       this.usermessage = message
       this.userimage = img
       this.item = item
       // console.log(this.item);
     },
+
     closeBottle() {
       this.modalbottle = !this.modalbottle
     },
@@ -431,31 +523,37 @@ export default {
     closeBottlesent() {
       this.modalbottlesent = !this.modalbottlesent
     },
-    useImage(url){
-      this.useimage = url;
+    useImage(url) {
+      this.useimage = url
     },
-    submit() {
-      alert(this.item)
+    async submit() {
+      // console.log(this.usertitle, this.usermessage, this.userimage);
+      await this.$axios.post('http://localhost:8080/user/add/inventory', {
+        title: this.usertitle,
+        message: this.usermessage,
+        image: this.userimage,
+      })
+      this.modalbottle = !this.modalbottle
+      alert('Add Complete')
     },
     signOut() {
       this.$auth.logout()
       this.$router.go({ name: 'signin' })
     },
-    async sentmsg(){
-      await this.$axios.post("http://localhost:8130/message/post/createMsg/", {
-          "_id": null,
-          "title": this.name,
-          "message": this.title,
-          "image": this.useimage,
-})
-      alert("Sent Complete");
-      this.modalbottlesent = !this.modalbottlesent;
-      this.title = ""
-       this.search = ""
-      this.useimage = ""
-      this.gif = ""
-
-    }
+    async sentmsg() {
+      await this.$axios.post('http://localhost:8130/message/post/createMsg/', {
+        _id: null,
+        title: this.title,
+        message: this.message,
+        image: this.useimage,
+      })
+      alert('Sent Complete')
+      this.modalbottlesent = !this.modalbottlesent
+      this.title = ''
+      this.search = ''
+      this.useimage = ''
+      this.gif = ''
+    },
   },
 }
 </script>
@@ -475,13 +573,13 @@ export default {
   z-index: 100;
   background-color: #e4c9a081;
 }
-.isselect{
+.isselect {
   border: 5px solid greenyellow;
 }
 .modal {
   text-align: center;
   background-color: white;
-  height: 500px;
+  height: 600px;
   width: 500px;
   margin-top: 5%;
   padding: 20px 0;
@@ -589,7 +687,7 @@ html {
   opacity: 0.4;
   top: 52vh;
   right: 30vw;
-  animation: 17s linear 1.5s infinite bottleSimplehamonic;
+  animation: 30s linear infinite bottleSimplehamonic;
   z-index: 3;
 }
 
@@ -621,7 +719,7 @@ html {
   /* padding: 10vw; */
   position: absolute;
   transform: translateX(-90%);
-  animation: 17s linear 1.5s infinite vibrate;
+  animation: 8s linear 1.5s infinite vibrate alternate;
   z-index: 3;
 }
 .sandbottle {
@@ -632,7 +730,7 @@ html {
   left: 48%;
   top: 68vh;
 }
-.treasure{
+.treasure {
   position: absolute;
   height: 30vh;
   transform: rotate(5deg);
