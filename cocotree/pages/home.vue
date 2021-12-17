@@ -1,35 +1,34 @@
 <template>
-
   <div>
-
     <nav class="bg-gray-800">
-  <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-    <div class="relative flex items-center justify-items-end h-16">
-      
-      <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-        <div class="ml-3 absolute">
-          <div style="display: flex">
-            <p style="color: #fff; width: 30vw;" class="w-24">{{name}}</p>
-            <button
-              class="
-                rounded-lg
-                h-7
-                bg-red-600
-                border-1
-                w-48
-              "
-              @click="signOut()"
-            >
-              <p class="text-white place-content-center">Logout</p>
-            </button>
+      <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+        <div class="relative flex items-center justify-items-end h-16">
+          <div
+            class="
+              absolute
+              inset-y-0
+              right-0
+              flex
+              items-center
+              pr-2
+              sm:static sm:inset-auto sm:ml-6 sm:pr-0
+            "
+          >
+            <div class="ml-3 absolute">
+              <div style="display: flex">
+                <p style="color: #fff; width: 60vw" class="w-24">{{ name }}</p>
+                <button
+                  class="rounded-lg h-7 bg-red-600 border-1 w-48"
+                  @click="signOut()"
+                >
+                  <p class="text-white place-content-center">Logout</p>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-
-
-</nav>
+    </nav>
 
     <svg viewBox="60 -210 500 2000" style="position: absolute">
       <path
@@ -143,8 +142,8 @@
     <!-- <div style="position: absolute" class="bottle">sdadsad</div> -->
 
     <!-- <div class=""> -->
-      <!-- <div onclick="alert('AAAAA')" class="bottle2" style="z-index: 55;position: absolute;">☼</div> -->
-      <!-- <svg
+    <!-- <div onclick="alert('AAAAA')" class="bottle2" style="z-index: 55;position: absolute;">☼</div> -->
+    <!-- <svg
         viewBox="-10 -20 300 300"
         style="position: absolute"
         class="bottle2"
@@ -159,13 +158,19 @@
           @click="openBottle()"
         />
       </svg> -->
-      <div v-for="item in bottlesuser" :key="item.message">
+    <div v-for="item in bottlesuser" :key="item.message">
       <div class="bottle2">
-      <img @click="openBottle(item.message, item.image, item)" src="https://media.discordapp.net/attachments/645996845457211452/921313844293427200/svg-path_bottle.png?width=201&height=670" class="insidebottle2" style="z-index: 200;" alt="">
+        <img
+          @click="openBottle(item.message, item.image, item)"
+          src="https://media.discordapp.net/attachments/645996845457211452/921313844293427200/svg-path_bottle.png?width=201&height=670"
+          class="insidebottle2"
+          style="z-index: 200"
+          alt=""
+        />
       </div>
     </div>
-      
-      <!-- <button class="btnbottle">AAAAAA</button> -->
+
+    <!-- <button class="btnbottle">AAAAAA</button> -->
     <!-- </div> -->
 
     <div class="groupwave3">
@@ -211,17 +216,27 @@
           <svg viewBox="-15 -7 86 19">
             <path d="M 0 0 C 5 -7 45 -11 54 0 L 54 5 L 0 5" class="sand"></path>
           </svg>
-          
         </div>
       </div>
     </div>
-    <img @click="openBottlesent()" key="bottle2" src="https://media.discordapp.net/attachments/645996845457211452/921313844293427200/svg-path_bottle.png?width=201&height=670" class="sandbottle mx-auto" style="z-index: 200;" alt="">
- 
+    <img
+      @click="openBottlesent()"
+      key="bottle2"
+      src="https://media.discordapp.net/attachments/645996845457211452/921313844293427200/svg-path_bottle.png?width=201&height=670"
+      class="sandbottle mx-auto"
+      style="z-index: 200"
+      alt=""
+    />
+
     <div class="modal-overlay" v-show="modalbottle">
       <div class="modal">
         <p class="title text-xl">{{ usermessage }}</p>
         <div class="field place-content-center">
-          <img :src="userimage" alt="" style="height: 253px; width: 480; object-fit: cover;">
+          <img
+            :src="userimage"
+            alt=""
+            style="height: 253px; width: 480; object-fit: cover"
+          />
           <!-- <textarea
             class="textarea1 w-4/5 border-2 p-3 h-64 rounded-lg outline-none"
             v-model="text"
@@ -259,19 +274,39 @@
       </div>
     </div>
 
-
-
-
-        <div class="modal-overlay" v-show="modalbottlesent">
+    <div class="modal-overlay" v-show="modalbottlesent" style="z-index: 1000;">
       <div class="modal">
         <p class="title text-xl">{{ usermessage }}</p>
         <div class="field place-content-center">
           <input
-                v-model="message"
+            v-model="title"
+            class="w-4/5 border-2 p-3 rounded-lg outline-none"
+            type="text"
+            placeholder="Message"
+          />
+        </div>
+
+        <div class=" field place-content-center relative">
+          <input
+                v-model="search"
                 class="w-4/5 border-2 p-3 rounded-lg outline-none"
                 type="text"
-                placeholder="Title"
+                placeholder="Search"
               />
+
+            <div class="absolute top-2 right-14"> <button @click="fetchUrl()" class="h-10 w-20 text-white rounded-lg bg-red-500 hover:bg-red-600">Search</button> </div>
+        </div>
+
+        <div class="field place-content-center">
+          <div v-for="url in gif" :key="url">
+            <img
+              :src="url"
+              alt=""
+              @click="useImage(url)"
+              :class="{isselect : useimage == url}"
+              style="height: 253px; width: 480; object-fit: cover"
+            />
+          </div>
         </div>
         <div class="field place-content-center space-x-1">
           <button
@@ -297,14 +332,13 @@
               w-2/5
               place-content-center
             "
-            @click="submit()"
+            @click="sentmsg()"
           >
-            <p class="text-white">Save</p>
+            <p class="text-white">Sent</p>
           </button>
         </div>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -319,7 +353,6 @@ export default {
         clearInterval(this.interval)
       }
     }, 2000)
-
   },
   middleware: 'auth',
   data() {
@@ -327,24 +360,32 @@ export default {
       interval: null,
       bottlesuser: [],
       text: '',
-      message:'',
+      message: '',
       modalbottlesent: false,
       modalbottle: false,
-      usermessage: "",
-      userimage: "",
-      item: "",
+      usermessage: '',
+      userimage: '',
+      item: '',
+      search: '',
+      gif:'',
+      useimage:'',
+      title: '',
     }
   },
   async asyncData({ $axios }) {
-  const bottles = await $axios.$get('http://localhost:8130/message/get/messages')
-  const name = await $axios.$get("http://localhost:8080/user/getName")
-  return { bottles, name }
-  
-
-
+    const bottles = await $axios.$get(
+      'http://localhost:8130/message/get/messages'
+    )
+    const name = await $axios.$get('http://localhost:8080/user/getName')
+    return { bottles, name}
   },
   middleware: 'auth',
   methods: {
+    async fetchUrl(){
+      const gif = await this.$axios.$get("http://localhost:8130/message/gif/" + this.search)
+      console.log(this.search);
+      this.gif = gif;
+    },
     openBottle(message, img, item) {
       this.modalbottle = !this.modalbottle
       this.usermessage = message
@@ -355,20 +396,31 @@ export default {
     closeBottle() {
       this.modalbottle = !this.modalbottle
     },
-    openBottlesent(){
+    openBottlesent() {
       this.modalbottlesent = !this.modalbottlesent
     },
-    closeBottlesent(){
+    closeBottlesent() {
       this.modalbottlesent = !this.modalbottlesent
     },
-
-    submit(){
-      alert(this.item);
+    useImage(url){
+      this.useimage = url;
+    },
+    submit() {
+      alert(this.item)
     },
     signOut() {
-        this.$auth.logout();
-        this.$router.go({ name: 'signin' })
-      },
+      this.$auth.logout()
+      this.$router.go({ name: 'signin' })
+    },
+    async sentmsg(){
+      await this.$axios.post("http://localhost:8130/message/post/createMsg/", {
+          "_id": null,
+          "title": this.name,
+          "message": this.title,
+          "image": this.useimage,
+})
+      alert("add complete");
+    }
   },
 }
 </script>
@@ -388,14 +440,16 @@ export default {
   z-index: 100;
   background-color: #e4c9a081;
 }
-
+.isselect{
+  border: 5px solid greenyellow;
+}
 .modal {
   text-align: center;
   background-color: white;
   height: 500px;
   width: 500px;
-  margin-top: 10%;
-  padding: 60px 0;
+  margin-top: 5%;
+  padding: 20px 0;
   border-radius: 20px;
   /* overflow: auto; */
 }
@@ -535,7 +589,7 @@ html {
   animation: 17s linear 1.5s infinite vibrate;
   z-index: 3;
 }
-.sandbottle{
+.sandbottle {
   position: absolute;
   height: 40vh;
   transform: rotate(-80deg);
@@ -555,13 +609,11 @@ html {
   from {
     transform: translateY(0vh);
     transform: rotate(-30deg);
-    
   }
 
   to {
     transform: translateY(1vh);
     transform: rotate(30deg);
-    
   }
 }
 
