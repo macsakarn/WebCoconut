@@ -55,8 +55,9 @@ export default {
           type: false
         },
         user: {
-          property: false,
+          property: 'name',
           // autoFetch: true
+          
         },
         endpoints: {
           login: { url: '/auth/login', method: 'post' },

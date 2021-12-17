@@ -119,7 +119,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "@nuxtjs/axios"
 import {
   required,
   minLength,
@@ -158,10 +158,11 @@ export default {
         };
         console.log(data);
 
-        axios
-          .post("http://localhost:9002/user/register", data)
+        this.$axios
+          .post("http://localhost:8080/user/register", data)
           .then((res) => {
             alert("Sign up Success");
+            this.$router.replace({ name: 'signin' })
             console.log(data);
           })
           .catch((err) => {

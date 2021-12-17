@@ -67,8 +67,13 @@ export default {
     }
   },
   methods: {
+    addName(){
+      this.$store.commit('data/add', this.name)
+      console.log("Add Name");
+    },
     async submit() {
       try {
+        this.addName()
         const response = await this.$auth.loginWith('local', {
           data: { name:this.name, password: this.password },
         })

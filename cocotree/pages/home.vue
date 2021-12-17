@@ -7,23 +7,21 @@
       <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
       </div>
       <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-        <div class="ml-3 relative">
-          <div>
-            <!-- <button type="button" class="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-              <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-            </button> -->
+        <div class="ml-3 absolute">
+          <div style="display: flex">
+            <p style="color: #fff;" class="w-24">{{name}}</p>
             <button
               class="
                 rounded-lg
-                h-10
+                h-7
                 bg-red-600
-                border-2
+                border-1
                 w-full
                 place-content-center
               "
               @click="signOut()"
             >
-              <p class="text-white">Logout</p>
+              <p class="text-white place-content-center">Logout</p>
             </button>
           </div>
         </div>
@@ -213,6 +211,11 @@
 
 <script>
 export default {
+
+  created() {
+    this.name = this.$store.state.data.name
+
+  },
   middleware: 'auth',
   methods: {
       signOut() {
@@ -222,6 +225,7 @@ export default {
   },
   data() {
     return {
+      name:"",
       bottles: [
         { message: 'JIM' },
         { message: 'JOSH' },
